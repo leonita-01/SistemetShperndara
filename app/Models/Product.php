@@ -96,6 +96,7 @@ class Product extends Model
         return $this->hasMany(AuctionProductBid::class);
     }
 
+    
     public function thumbnail()
     {
         return $this->belongsTo(Upload::class, 'thumbnail_img');
