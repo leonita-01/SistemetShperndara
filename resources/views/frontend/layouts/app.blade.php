@@ -30,12 +30,12 @@
         @php
             $meta_image = uploaded_asset(get_setting('meta_image'));
         @endphp
-        <!-- Schema.org markup for Google+ -->
+        
         <meta itemprop="name" content="{{ get_setting('meta_title') }}">
         <meta itemprop="description" content="{{ get_setting('meta_description') }}">
         <meta itemprop="image" content="{{ $meta_image }}">
 
-        <!-- Twitter Card data -->
+        
         <meta name="twitter:card" content="product">
         <meta name="twitter:site" content="@publisher_handle">
         <meta name="twitter:title" content="{{ get_setting('meta_title') }}">
@@ -43,7 +43,7 @@
         <meta name="twitter:creator" content="@author_handle">
         <meta name="twitter:image" content="{{ $meta_image }}">
 
-        <!-- Open Graph data -->
+        
         <meta property="og:title" content="{{ get_setting('meta_title') }}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ route('home') }}" />
@@ -53,19 +53,19 @@
         <meta property="fb:app_id" content="{{ env('FACEBOOK_PIXEL_ID') }}">
     @endif
 
-    <!-- Favicon -->
+    
     @php
         $site_icon = uploaded_asset(get_setting('site_icon'));
     @endphp
     <link rel="icon" href="{{ $site_icon }}">
     <link rel="apple-touch-icon" href="{{ $site_icon }}">
 
-    <!-- Google Fonts -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <!-- CSS Files -->
+    
     <link rel="stylesheet" href="{{ static_asset('assets/css/vendors.css') }}">
     @if ($rtl == 1)
         <link rel="stylesheet" href="{{ static_asset('assets/css/bootstrap-rtl.min.css') }}">
@@ -175,7 +175,7 @@
     </style>
 
 @if (get_setting('google_analytics') == 1)
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ env('TRACKING_ID') }}"></script>
 
     <script>
@@ -187,7 +187,7 @@
 @endif
 
 @if (get_setting('facebook_pixel') == 1)
-    <!-- Facebook Pixel Code -->
+    
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -203,7 +203,7 @@
     <noscript>
         <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ env('FACEBOOK_PIXEL_ID') }}&ev=PageView&noscript=1"/>
     </noscript>
-    <!-- End Facebook Pixel Code -->
+   
 @endif
 
 @php
@@ -212,7 +212,7 @@
 
 </head>
 <body>
-    <!-- aiz-main-wrapper -->
+    
     <div class="aiz-main-wrapper d-flex flex-column bg-white">
         @php
             $user = auth()->user();
@@ -224,18 +224,19 @@
 
             $system_language = get_system_language();
         @endphp
-        <!-- Header -->
+        
+
         @include('frontend.inc.nav')
 
         @yield('content')
 
-        <!-- footer -->
+        
         @include('frontend.inc.footer')
 
     </div>
 
     @if(get_setting('use_floating_buttons') == 1)
-        <!-- Floating Buttons -->
+        
         @include('frontend.inc.floating_buttons')
     @endif
 
@@ -245,11 +246,11 @@
 
 
     @if (env("DEMO_MODE") == "On")
-        <!-- demo nav -->
+       
         @include('frontend.inc.demo_nav')
     @endif
 
-    <!-- cookies agreement -->
+    
     @php
         $alert_location = get_setting('custom_alert_location');
         $order = in_array($alert_location, ['top-left', 'top-right']) ? 'asc' : 'desc';
@@ -289,7 +290,8 @@
         @endforeach
     </div>
 
-    <!-- website popup -->
+    
+
     @php
         $dynamic_popups = App\Models\DynamicPopup::where('status', 1)->orderBy('id', 'asc')->get();
     @endphp
@@ -335,6 +337,7 @@
                                 <img class="w-100" src="{{ uploaded_asset($dynamic_popup->banner) }}" alt="dynamic_popup">
                             </div>
                         </div>
+
                         <div class="pb-5 pt-4 px-3 px-md-2rem">
                             <h1 class="fs-30 fw-700 text-dark">{{ $dynamic_popup->title }}</h1>
                             <p class="fs-14 fw-400 mt-3 mb-4">{{ $dynamic_popup->summary }}</p>
@@ -373,7 +376,8 @@
 
     @yield('modal')
 
-    <!-- SCRIPTS -->
+   
+
     <script src="{{ static_asset('assets/js/vendors.js') }}"></script>
     <script src="{{ static_asset('assets/js/aiz-core.js?v=') }}{{ rand(1000, 9999) }}"></script>
 
@@ -393,6 +397,7 @@
             })();
         </script>
     @endif
+
 
     <script>
         @foreach (session('flash_notification', collect())->toArray() as $message)
@@ -519,7 +524,8 @@
                 $('.search-preloader').removeClass('d-none');
                 $.post('{{ route('search.ajax') }}', { _token: AIZ.data.csrf, search:searchKey}, function(data){
                     if(data == '0'){
-                        // $('.typed-search-box').addClass('d-none');
+                        
+
                         $('#search-content').html(null);
                         $('.typed-search-box .search-nothing').removeClass('d-none').html('{{ translate('Sorry, nothing found for') }} <strong>"'+searchKey+'"</strong>');
                         $('.search-preloader').addClass('d-none');
@@ -569,6 +575,7 @@
                 $('#cart_items_sidenav').html(parseInt($('#cart_items_sidenav').html())-1);
             });
         }
+
 
         function showLoginModal() {
             $('#login_modal').modal();
@@ -657,11 +664,11 @@
 
         function checkAddToCartValidity(){
             var names = {};
-            $('#option-choice-form input:radio').each(function() { // find unique names
+            $('#option-choice-form input:radio').each(function() {
                 names[$(this).attr('name')] = true;
             });
             var count = 0;
-            $.each(names, function() { // then count them
+            $.each(names, function() { 
                 count++;
             });
 
@@ -697,9 +704,9 @@
                 });
 
                 if ("{{ get_setting('facebook_pixel') }}" == 1){
-                    // Facebook Pixel AddToCart Event
+                    
                     fbq('track', 'AddToCart', {content_type: 'product'});
-                    // Facebook Pixel AddToCart Event
+                   
                 }
             }
             else{
@@ -773,6 +780,7 @@
             AIZ.plugins.notify('success', "{{ translate('Coupon Code Copied') }}");
         }
 
+
         $(document).ready(function(){
             $('.cart-animate').animate({margin : 0}, "slow");
 
@@ -829,7 +837,7 @@
             $('input[name=country_code]').val(country.dialCode);
 
             input.addEventListener("countrychange", function(e) {
-                // var currentMask = e.currentTarget.placeholder;
+                
                 var country = iti.getSelectedCountryData();
                 $('input[name=country_code]').val(country.dialCode);
 
@@ -887,7 +895,7 @@
             });
 
             function toggleDemoNav() {
-                // demoNav.classList.toggle('show');
+                
                 demoNav.classList.toggle('shadow-none');
                 lineOne.classList.toggle('line-cross');
                 lineTwo.classList.toggle('line-fade-out');
@@ -933,3 +941,4 @@
 
 </body>
 </html>
+
