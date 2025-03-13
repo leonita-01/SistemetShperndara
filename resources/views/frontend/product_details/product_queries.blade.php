@@ -1,3 +1,4 @@
+
 @if(get_setting('product_query_activation') == 1)
     <div class="bg-white border mt-4 mb-4" id="product_query">
         <div class="p-3 p-sm-4">
@@ -6,7 +7,6 @@
             </h3>
         </div>
 
-        <!-- Login & Register -->
         @guest
             <p class="fs-14 fw-400 mb-0 px-3 px-sm-4 mt-3"><a
                     href="{{ route('user.login') }}">{{ translate('Login') }}</a> {{ translate('or') }} <a class="mr-1"
@@ -15,7 +15,7 @@
             </p>
         @endguest
 
-        <!-- Query Submit -->
+        
         @auth
             <div class="query form px-3 px-sm-4">
                 @if ($errors->any())
@@ -39,7 +39,6 @@
                 </form>
             </div>
 
-            <!-- Own Queries -->
             @php
                 $own_product_queries = $detailedProduct->product_queries->where('customer_id', Auth::id());
             @endphp
@@ -52,6 +51,8 @@
                             <span class="mr-4">{{ translate('My Questions') }}</span>
                         </h3>
                     </div>
+
+
                     @foreach ($own_product_queries as $product_query)
                         <div class="produc-queries mb-4">
                             <div class="query d-flex my-2">
@@ -75,6 +76,7 @@
                                     </span>
                                 </div>
                             </div>
+
                             <div class="answer d-flex my-2">
                                 <span class="mt-1"> <svg xmlns="http://www.w3.org/2000/svg" width="24.99"
                                         height="24.98" viewBox="0 0 24.99 24.98">
@@ -87,6 +89,7 @@
                                                 stroke-width="1" />
                                         </g>
                                     </svg></span>
+
 
                                 <div class="ml-3">
                                     <div class="fs-14">
@@ -105,9 +108,10 @@
             @endif
         @endauth
 
-        <!-- Others Queries -->
         <div class="queries-area my-4 mb-0 px-3 px-sm-4">
             @include('frontend.partials.product_query_pagination')
         </div>
     </div>
 @endif
+
+
