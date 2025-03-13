@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-    <!-- Cart Details -->
+   
     <section class="my-4" id="cart-details">
         @include('frontend.partials.cart.cart_details', ['carts' => $carts])
     </section>
@@ -27,7 +27,7 @@
             });
         }
 
-        // Cart item selection
+        
         $(document).on("change", ".check-all", function() {
             $('.check-one:checkbox').prop('checked', this.checked);
             updateCartStatus();
@@ -58,7 +58,8 @@
             });
         }
 
-        // coupon apply
+      
+
         $(document).on("click", "#coupon-apply", function() {
             @if (Auth::check())
                 @if(Auth::user()->user_type != 'customer')
@@ -81,13 +82,16 @@
                         AIZ.plugins.notify(data.response_message.response, data.response_message.message);
                         $("#cart_summary").html(data.html);
                     }
+
                 });
+
             @else
                 $('#login_modal').modal('show');
             @endif
         });
 
-        // coupon remove
+        
+        
         $(document).on("click", "#coupon-remove", function() {
             @if (Auth::check() && Auth::user()->user_type == 'customer')
                 var data = new FormData($('#remove-coupon-form')[0]);
@@ -105,8 +109,10 @@
                         $("#cart_summary").html(data);
                     }
                 });
+
             @endif
         });
+
 
     </script>
 @endsection
